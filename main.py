@@ -27,6 +27,7 @@ def jouer():
         ÉCRAN.fill("black")
 
         TEXTE_JOUER = obtenir_police(45).render("C'est l'écran de JEU.", True, "White")
+        TEXTE_PIKACHU = obtenir_police(45).render("PIKACHU", True, "White" )
         RECTANGLE_JOUER = TEXTE_JOUER.get_rect(center=(640, 260))
         ÉCRAN.blit(TEXTE_JOUER, RECTANGLE_JOUER)
 
