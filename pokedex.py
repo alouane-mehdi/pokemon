@@ -38,7 +38,7 @@ def afficher_pokedex_pygame(pokedex, fond_ecran, chemin_musique):
     pygame.mixer.music.load(chemin_musique)
     pygame.mixer.music.play(-1)
 
-    # Charger les images des Pokémon
+    # Charger les images des Pokémons
     images = {}
     rect_images = {}
     for pokemon in pokedex.pokemons:
@@ -58,7 +58,7 @@ def afficher_pokedex_pygame(pokedex, fond_ecran, chemin_musique):
         for pokemon in pokedex.pokemons:
             font = pygame.font.SysFont(None, 36)
 
-            # Positionnement des Pokémon
+            # Positionnement des Pokémons
             if pokemon.nom in ["Pikachu", "Salameche"]:
                 position_x = width - 150
                 details_x = 20  # Description à gauche pour les Pokémon à droite
