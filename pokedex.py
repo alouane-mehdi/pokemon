@@ -1,7 +1,4 @@
 
-
-
-
 import pygame
 
 class Pokemon:
@@ -99,13 +96,13 @@ def afficher_pokedex_pygame(pokedex, fond_ecran, chemin_musique):
     pygame.mixer.music.stop()
     pygame.quit()
 
-# Création de quatre Pokémon avec des images
+# Création de 4 Pokémons avec des images
 pikachu = Pokemon("Pikachu", "Électrique", "Célèbre pour ses joues électriques.", "image/pikachu.png")
 bulbizarre = Pokemon("Bulbizarre", "Plante/Poison", "Possède une plante sur son dos.", "image/Bulbizarre.png")
 salamèche = Pokemon("Salameche", "Feu", "Sa queue est enflammée quand il est en bonne santé.", "image/salameche.png")
 carapuce = Pokemon("Carapuce", "Eau", "Un petit Pokémon tortue.", "image/carapuce.png")
 
-# Création du Pokedex et ajout des Pokémon
+# Création du Pokedex et ajout des Pokémons
 mon_pokedex = Pokedex()
 mon_pokedex.ajouter_pokemon(pikachu)
 mon_pokedex.ajouter_pokemon(bulbizarre)
