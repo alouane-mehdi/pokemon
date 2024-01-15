@@ -1,3 +1,7 @@
+
+
+
+
 import pygame
 
 class Pokemon:
@@ -20,9 +24,9 @@ class Pokedex:
     def ajouter_pokemon(self, pokemon):
         self.pokemons.append(pokemon)
 
-
-def afficher_pokedex_pygame(pokedex, fond_ecran):
+def afficher_pokedex_pygame(pokedex, fond_ecran, chemin_musique):
     pygame.init()
+    pygame.mixer.init()  # Initialise le mixer
 
     # Définir la taille de la fenêtre
     width, height = 1200, 700
@@ -32,6 +36,10 @@ def afficher_pokedex_pygame(pokedex, fond_ecran):
     # Charger l'image de fond
     fond = pygame.image.load(fond_ecran)
     fond = pygame.transform.scale(fond, (width, height))
+
+    # Charger et jouer la musique de fond
+    pygame.mixer.music.load(chemin_musique)
+    pygame.mixer.music.play(-1)
 
     # Charger les images des Pokémon
     images = {}
@@ -88,6 +96,7 @@ def afficher_pokedex_pygame(pokedex, fond_ecran):
 
         pygame.display.flip()
 
+    pygame.mixer.music.stop()
     pygame.quit()
 
 # Création de quatre Pokémon avec des images
@@ -103,12 +112,9 @@ mon_pokedex.ajouter_pokemon(bulbizarre)
 mon_pokedex.ajouter_pokemon(salamèche)
 mon_pokedex.ajouter_pokemon(carapuce)
 
-# Chemin vers l'image de fond
+# Chemin vers l'image de fond et la musique
 fond_ecran = "image/fond-ecran2.jpg"
+chemin_musique = "music/Tetris2.mp3"  
 
 # Affichage du Pokedex avec Pygame
-afficher_pokedex_pygame(mon_pokedex, fond_ecran)
-
-
-
-
+afficher_pokedex_pygame(mon_pokedex, fond_ecran, chemin_musique)
