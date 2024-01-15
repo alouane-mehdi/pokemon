@@ -13,7 +13,7 @@ pygame.display.set_caption("Sélection de Personnage")
 blanc = (255, 255, 255)
 noir = (0, 0, 0)
 rouge = (255, 0, 0)
-vert = (0, 255, 0)
+
 
 # Charger les images des personnages
 personnage1_img = pygame.image.load("assets/bulbizarre.jpg")  # Remplacez "personnage1.png" par le chemin de votre image
@@ -31,15 +31,6 @@ personnage4_img = pygame.transform.scale(personnage4_img, (150, 150))
 personnages = [personnage1_img, personnage2_img, personnage3_img, personnage4_img]
 personnage_actuel = 0
 
-
-def afficher_pokemon_choisi(personnage_index):
-    fenetre_pokemon = pygame.display.set_mode((largeur, hauteur))
-    pygame.display.set_caption("Pokemon Choisi")
-
-    pokemon_choisi = pygame.transform.scale(personnages[personnage_index], (largeur, hauteur))
-    
-    fenetre_pokemon.blit(pokemon_choisi, (0, 0))
-    pygame.display.flip()
 # Boucle principale
 while True:
     for event in pygame.event.get():
@@ -53,11 +44,7 @@ while True:
                 personnage_actuel = (personnage_actuel - 1) % len(personnages)
             elif event.key == pygame.K_RIGHT:
                 personnage_actuel = (personnage_actuel + 1) % len(personnages)
-                
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:  # Clic gauche
-                    afficher_pokemon_choisi(personnage_actuel)
-    
+                    
 
     # Affichage des personnages et de la sélection
     fenetre.fill(noir)
