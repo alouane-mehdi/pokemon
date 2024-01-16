@@ -26,7 +26,7 @@ def afficher_pokedex_pygame(pokedex, fond_ecran, chemin_musique):
     pygame.mixer.init()  # Initialise le mixer
 
     # Définir la taille de la fenêtre
-    width, height = 1200, 700
+    width, height = 950, 700
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Pokedex")
 
@@ -56,7 +56,7 @@ def afficher_pokedex_pygame(pokedex, fond_ecran, chemin_musique):
 
         y = 20
         for pokemon in pokedex.pokemons:
-            font = pygame.font.SysFont(None, 36)
+            font = pygame.font.SysFont(None, 30)
 
             # Positionnement des Pokémons
             if pokemon.nom in ["Pikachu", "Salameche"]:
