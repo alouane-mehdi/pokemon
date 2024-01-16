@@ -13,6 +13,14 @@ class Pokemon:
 # Initialisation de Pygame
 pygame.init()
 
+# Initialisation du module mixer pour la musique
+pygame.mixer.init()
+
+# Charger et jouer la musique de fond
+pygame.mixer.music.load("music/street-fight.mp3")  # Remplacez par le chemin de votre fichier de musique
+pygame.mixer.music.set_volume(0.5)  # Réglez le volume (0.0 à 1.0)
+pygame.mixer.music.play(-1)  # -1 signifie que la musique jouera en boucle
+
 # Création des Pokémon
 pikachu = Pokemon("Pikachu", "Électrique", "Célèbre pour ses joues électriques.", "image/pikachu.png")
 bulbizarre = Pokemon("Bulbizarre", "Plante/Poison", "Possède une plante sur son dos.", "image/Bulbizarre.png")
@@ -24,8 +32,8 @@ ecran = pygame.display.set_mode((900, 400))
 pygame.display.set_caption("Pokémon Combat Simulator")
 
 # Charger l'image de fond
-fond = pygame.image.load("image/arene.webp")  # Remplacez par le chemin de votre image
-fond = pygame.transform.scale(fond, (900, 400))  # Redimensionner l'image pour qu'elle corresponde à la taille de la fenêtre
+fond = pygame.image.load("image/arene.webp")
+fond = pygame.transform.scale(fond, (900, 400))
 
 # Fonction pour afficher les détails d'un Pokémon
 def afficher_details_pokemon(pokemon):
@@ -41,13 +49,13 @@ def afficher_details_pokemon(pokemon):
             if event.type == pygame.QUIT:
                 running = False
 
-        fenetre_details.fill((255, 255, 255))  # Fond blanc
-        fenetre_details.blit(pokemon.image, (100, 50))  # Afficher l'image du Pokémon
-        fenetre_details.blit(texte_description, (10, 260))  # Afficher la description
+        fenetre_details.fill((255, 255, 255))
+        fenetre_details.blit(pokemon.image, (100, 50))
+        fenetre_details.blit(texte_description, (10, 260))
 
         pygame.display.flip()
 
-    pygame.display.set_mode((900, 400))  # Restaurer la taille de la fenêtre principale
+    pygame.display.set_mode((900, 400))
 
 # Boucle principale
 while True:
@@ -74,3 +82,5 @@ while True:
     ecran.blit(carapuce.image, (650, 50))
 
     pygame.display.flip()
+
+
