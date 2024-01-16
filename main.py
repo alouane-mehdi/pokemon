@@ -1,6 +1,7 @@
 import pygame
 import sys
 from button import Bouton
+from syscombat import Jeu  # Assurez-vous de remplacer "syscombat" par le vrai nom du fichier
 
 class PokemonMenu:
     def __init__(self):
@@ -19,32 +20,22 @@ class PokemonMenu:
 
     def obtenir_police(self, taille):
         return pygame.font.Font("assets/font.ttf", taille)
-
     def jouer(self):
-        while True:
-            POSITION_SOURIS = pygame.mouse.get_pos()
+        combat = Jeu()
 
-            self.ÉCRAN.fill("black")
+        pygame.event.clear()  # Efface les événements en attente
 
-            TEXTE_JOUER = self.obtenir_police(45).render("C'est l'écran de JEU.", True, "White")
-            RECTANGLE_JOUER = TEXTE_JOUER.get_rect(center=(640, 260))
-            self.ÉCRAN.blit(TEXTE_JOUER, RECTANGLE_JOUER)
-
-            BOUTON_RETOUR = Bouton(image=None, pos=(640, 460),
-                                   text_input="RETOUR", font=self.obtenir_police(75), base_color="White", hovering_color="Green")
-
-            BOUTON_RETOUR.changer_couleur(POSITION_SOURIS)
-            BOUTON_RETOUR.mettre_a_jour(self.ÉCRAN)
-
+        # Boucle pour choisir le niveau
+        while combat.choix_niveau:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if BOUTON_RETOUR.verifier_input(POSITION_SOURIS):
-                        self.menu_principal()
+                combat.choisirNiveau(event)
 
-            pygame.display.update()
+        # Une fois le niveau choisi, initialisez les personnages et lancez le jeu
+        combat.initialiserPersonnages()
+        combat.lancerJeu()
 
     def options(self):
         while True:

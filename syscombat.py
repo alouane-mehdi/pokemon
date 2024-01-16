@@ -1,5 +1,7 @@
 import pygame
 import sys
+from pygame.locals import QUIT, KEYDOWN, K_1, K_2, K_3, K_4
+import random  # Ajouter l'import pour la sélection aléatoire
 
 class Personnage:
     def __init__(self, nom, vie, image_path, scale_factor=1):
@@ -34,20 +36,85 @@ class Jeu:
         self.niveau = 1
         self.joueur = None
         self.ennemi = None
+        self.choix_niveau = True  # Nouvelle variable pour gérer l'écran de choix du niveau
+        
+    def quitterJeu(self):
+        pygame.quit()
+        sys.exit()
 
-    def choisirNiveau(self):
-        self.niveau = int(input("Choisissez le niveau de difficulté (1 facile, 2 moyen, 3 difficile) : "))
+    def afficher_choix_niveau(self, screen):
+        screen.fill((255, 255, 255))
+
+        police = pygame.font.Font(None, 36)
+        texte = police.render("Choisissez votre personnage :", True, (0, 0, 0))
+        rect_texte = texte.get_rect(center=(400, 100))
+        screen.blit(texte, rect_texte)
+
+        texte_pikachu = police.render("1. Pikachu", True, (0, 0, 0))
+        rect_pikachu = texte_pikachu.get_rect(center=(400, 200))
+        screen.blit(texte_pikachu, rect_pikachu)
+
+        texte_carapuce = police.render("2. Carapuce", True, (0, 0, 0))
+        rect_carapuce = texte_carapuce.get_rect(center=(400, 250))
+        screen.blit(texte_carapuce, rect_carapuce)
+
+        texte_salamèche = police.render("3. Salamèche", True, (0, 0, 0))
+        rect_salamèche = texte_salamèche.get_rect(center=(400, 300))
+        screen.blit(texte_salamèche, rect_salamèche)
+
+        texte_bulbizarre = police.render("4. Bulbizarre", True, (0, 0, 0))
+        rect_bulbizarre = texte_bulbizarre.get_rect(center=(400, 350))
+        screen.blit(texte_bulbizarre, rect_bulbizarre)
+
+    def afficher_arena(self, screen, arena_image):
+        screen.blit(arena_image, (0, 0))
+
+    def choisirNiveau(self, event):
+        if event.type == KEYDOWN:
+            if event.key == K_1:
+                self.niveau = 1
+                self.choix_niveau = False
+                self.initialiserPersonnages()
+            elif event.key == K_2:
+                self.niveau = 2 
+                self.choix_niveau = False
+                self.initialiserPersonnages()
+            elif event.key == K_3:
+                self.niveau = 3
+                self.choix_niveau = False
+                self.initialiserPersonnages()
+            elif event.key == K_4:
+                self.niveau = 4
+                self.choix_niveau = False
+                self.initialiserPersonnages()
 
     def initialiserPersonnages(self):
-        if self.niveau == 1:
-            self.joueur = Personnage("Joueur", 13, "assets/bulbizarre.jpg", scale_factor=5)
-            self.ennemi = Personnage("IA", 13, "assets/carapuce.jpg", scale_factor=5)
-        elif self.niveau == 2:
-            self.joueur = Personnage("Joueur", 23, "assets/bulbizarre.jpg", scale_factor=5)
-            self.ennemi = Personnage("IA", 23, "assets/carapuce.jpg", scale_factor=5)
-        elif self.niveau == 3:
-            self.joueur = Personnage("Joueur", 33, "assets/bulbizarre.jpg", scale_factor=5)
-            self.ennemi = Personnage("IA", 33, "assets/carapuce.jpg", scale_factor=5)
+        personnages_disponibles = [
+            Personnage("Pikachu", 13, "assets/pikachu.png", scale_factor=5),
+            Personnage("Carapuce", 23, "assets/carapuce.jpg", scale_factor=5),
+            Personnage("Salamèche", 33, "assets/salameche.jpg", scale_factor=5),
+            Personnage("Bulbizarre", 43, "assets/bulbizarre.jpg", scale_factor=5)
+        ]
+
+        choix_joueur = None
+
+        while choix_joueur is None:
+            for event in pygame.event.get():
+                if event.type == KEYDOWN:
+                    if event.key == K_1:
+                        choix_joueur = "Pikachu"
+                    elif event.key == K_2:
+                        choix_joueur = "Carapuce"
+                    elif event.key == K_3:
+                        choix_joueur = "Salamèche"
+                    elif event.key == K_4:
+                        choix_joueur = "Bulbizarre"
+
+        self.joueur = next(p for p in personnages_disponibles if p.nom == choix_joueur)
+
+        # Sélection aléatoire de l'ennemi parmi les personnages restants
+        personnages_restants = [p for p in personnages_disponibles if p != self.joueur]
+        self.ennemi = random.choice(personnages_restants)
 
     def lancerJeu(self):
         pygame.init()
@@ -62,34 +129,42 @@ class Jeu:
 
         while True:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+                if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
+                elif self.choix_niveau:
+                    self.choisirNiveau(event)
 
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_SPACE]:
-                self.joueur.attaquer(self.ennemi)
-                if self.ennemi.vie <= 0:
-                    print(f"{self.ennemi.nom} n'a plus de vie ! {self.joueur.nom} remporte la victoire!")
-                    pygame.quit()
-                    sys.exit()
+            if self.choix_niveau:
+                self.afficher_choix_niveau(screen)
+            else:
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_SPACE]:
+                    self.joueur.attaquer(self.ennemi)
+                    if self.ennemi.vie <= 0:
+                        print(f"{self.ennemi.nom} n'a plus de vie ! {self.joueur.nom} remporte la victoire!")
+                        pygame.quit()
+                        sys.exit()
 
-                self.ennemi.attaquer(self.joueur)
-                if self.joueur.vie <= 0:
-                    print(f"{self.joueur.nom} n'a plus de vie ! {self.ennemi.nom} remporte la victoire!")
-                    pygame.quit()
-                    sys.exit()
+                    self.ennemi.attaquer(self.joueur)
+                    if self.joueur.vie <= 0:
+                        print(f"{self.joueur.nom} n'a plus de vie ! {self.ennemi.nom} remporte la victoire!")
+                        pygame.quit()
+                        sys.exit()
 
-            screen.blit(arena_image, (0, 0))
+                self.afficher_arena(screen, arena_image)
+                self.joueur.afficher_barre_vie(screen)
+                screen.blit(self.joueur.image, (self.joueur.x, self.joueur.y))
 
-            self.joueur.afficher_barre_vie(screen)
-            screen.blit(self.joueur.image, (self.joueur.x, self.joueur.y))
+                self.ennemi.x = width - self.ennemi.rect.width
+                self.ennemi.y = 50
+
+                self.ennemi.afficher_barre_vie(screen)
+                screen.blit(self.ennemi.image, (self.ennemi.x, self.ennemi.y))
 
             pygame.display.flip()
             clock.tick(30)
 
 if __name__ == "__main__":
     jeu = Jeu()
-    jeu.choisirNiveau()
-    jeu.initialiserPersonnages()
     jeu.lancerJeu()
