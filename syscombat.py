@@ -1,23 +1,23 @@
 import pygame
 import sys
 from pygame.locals import QUIT, KEYDOWN, K_1, K_2, K_3, K_4
-import random  # Ajouter l'import pour la sélection aléatoire
+import random  
 
 class Personnage:
-    def __init__(self, nom, vie, image_path, scale_factor=1):
+    def __init__(self, nom, vie, image_path, degats, scale_factor=1):
         self.nom = nom
         self.vie = vie
         self.vie_max = vie
+        self.degats = degats  # Ajout de l'attribut degats
         self.image = pygame.transform.scale(pygame.image.load(image_path),
                                             (int(50 * scale_factor), int(50 * scale_factor)))
         self.rect = self.image.get_rect()
-        self.x = 100  # Initial X position
-        self.y = 300  # Initial Y position
+        self.x = 100  
+        self.y = 300  
 
     def attaquer(self, ennemi):
-        degats = 5
-        ennemi.vie -= degats
-        print(f"{self.nom} attaque {ennemi.nom} et lui inflige {degats} dégâts.")
+        ennemi.vie -= self.degats
+        print(f"{self.nom} attaque {ennemi.nom} et lui inflige {self.degats} dégâts.")
         print(f"Vie de {ennemi.nom}: {ennemi.vie}")
 
     def afficher_barre_vie(self, screen):
@@ -90,10 +90,10 @@ class Jeu:
 
     def initialiserPersonnages(self):
         personnages_disponibles = [
-            Personnage("Pikachu", 13, "assets/pikachu.png", scale_factor=5),
-            Personnage("Carapuce", 23, "assets/carapuce.jpg", scale_factor=5),
-            Personnage("Salamèche", 33, "assets/salameche.jpg", scale_factor=5),
-            Personnage("Bulbizarre", 43, "assets/bulbizarre.jpg", scale_factor=5)
+            Personnage("Pikachu", 175, "assets/pikachu.png", degats=50, scale_factor=5),
+            Personnage("Carapuce", 300, "assets/carapuce.jpg", degats=30, scale_factor=5),
+            Personnage("Salamèche", 175, "assets/salameche.jpg", degats=50, scale_factor=5),
+            Personnage("Bulbizarre", 250, "assets/bulbizarre.jpg", degats=30, scale_factor=5)
         ]
 
         choix_joueur = None
@@ -168,3 +168,4 @@ class Jeu:
 if __name__ == "__main__":
     jeu = Jeu()
     jeu.lancerJeu()
+

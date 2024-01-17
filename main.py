@@ -36,7 +36,7 @@ class PokemonMenu:
         # Une fois le niveau choisi, initialisez les personnages et lancez le jeu
         combat.initialiserPersonnages()
         combat.lancerJeu()
-
+ 
     def options(self):
         while True:
             POSITION_SOURIS_OPTIONS = pygame.mouse.get_pos()
