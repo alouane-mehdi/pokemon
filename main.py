@@ -1,7 +1,7 @@
 import pygame
 import sys
 from button import Bouton
-from syscombat import Jeu  # Assurez-vous de remplacer "syscombat" par le vrai nom du fichier
+from syscombat import Jeu  
 
 class PokemonMenu:
     def __init__(self):
@@ -32,10 +32,9 @@ class PokemonMenu:
                     pygame.quit()
                     sys.exit()
                 combat.choisirNiveau(event)
+                combat.initialiserPersonnages()
+                combat.lancerJeu()
 
-        # Une fois le niveau choisi, initialisez les personnages et lancez le jeu
-        combat.initialiserPersonnages()
-        combat.lancerJeu()
  
     def options(self):
         while True:

@@ -42,28 +42,35 @@ class Jeu:
         pygame.quit()
         sys.exit()
 
+    def revenirEcranSelection(self):
+        self.niveau = 1
+        self.joueur = None
+        self.ennemi = None
+        self.choix_niveau = True
+
     def afficher_choix_niveau(self, screen):
-        screen.fill((255, 255, 255))
+        screen.fill((0, 0, 0))
 
         police = pygame.font.Font(None, 36)
-        texte = police.render("Choisissez votre personnage :", True, (0, 0, 0))
-        rect_texte = texte.get_rect(center=(400, 100))
+        texte = police.render("Choisissez votre Pokémon :", True, (255, 255, 255))
+        rect_texte = texte.get_rect(center=(170, 100))
+        pygame.image.load("assets/pikachu.png")
         screen.blit(texte, rect_texte)
 
-        texte_pikachu = police.render("1. Pikachu", True, (0, 0, 0))
-        rect_pikachu = texte_pikachu.get_rect(center=(400, 200))
+        texte_pikachu = police.render("Pikachu", True, (255, 255, 255))
+        rect_pikachu = texte_pikachu.get_rect(center=(200, 200))
         screen.blit(texte_pikachu, rect_pikachu)
 
-        texte_carapuce = police.render("2. Carapuce", True, (0, 0, 0))
-        rect_carapuce = texte_carapuce.get_rect(center=(400, 250))
+        texte_carapuce = police.render("Carapuce", True, (255, 255, 255))
+        rect_carapuce = texte_carapuce.get_rect(center=(500, 250))
         screen.blit(texte_carapuce, rect_carapuce)
 
-        texte_salamèche = police.render("3. Salamèche", True, (0, 0, 0))
-        rect_salamèche = texte_salamèche.get_rect(center=(400, 300))
+        texte_salamèche = police.render("Salamèche", True, (255, 255, 255))
+        rect_salamèche = texte_salamèche.get_rect(center=(600, 400))
         screen.blit(texte_salamèche, rect_salamèche)
 
-        texte_bulbizarre = police.render("4. Bulbizarre", True, (0, 0, 0))
-        rect_bulbizarre = texte_bulbizarre.get_rect(center=(400, 350))
+        texte_bulbizarre = police.render("Bulbizarre", True, (255, 255, 255))
+        rect_bulbizarre = texte_bulbizarre.get_rect(center=(100, 300))
         screen.blit(texte_bulbizarre, rect_bulbizarre)
 
     def afficher_arena(self, screen, arena_image):
@@ -130,8 +137,7 @@ class Jeu:
         while True:
             for event in pygame.event.get():
                 if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
+                    self.quitterJeu()
                 elif self.choix_niveau:
                     self.choisirNiveau(event)
 
@@ -143,14 +149,12 @@ class Jeu:
                     self.joueur.attaquer(self.ennemi)
                     if self.ennemi.vie <= 0:
                         print(f"{self.ennemi.nom} n'a plus de vie ! {self.joueur.nom} remporte la victoire!")
-                        pygame.quit()
-                        sys.exit()
+                        self.revenirEcranSelection()
 
                     self.ennemi.attaquer(self.joueur)
                     if self.joueur.vie <= 0:
                         print(f"{self.joueur.nom} n'a plus de vie ! {self.ennemi.nom} remporte la victoire!")
-                        pygame.quit()
-                        sys.exit()
+                        self.revenirEcranSelection()
 
                 self.afficher_arena(screen, arena_image)
                 self.joueur.afficher_barre_vie(screen)
@@ -168,4 +172,3 @@ class Jeu:
 if __name__ == "__main__":
     jeu = Jeu()
     jeu.lancerJeu()
-
