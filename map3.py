@@ -21,7 +21,8 @@ mini_width, mini_height = mini_image.get_size()
 mini_image_x = screen_width - mini_width - 10  
 mini_image_y = (screen_height - mini_height) // 2
 
-pygame.mixer.music.load('pokemon/assets/')
+pygame.mixer.music.load('pokemon/assets/Fortnite Menu Theme (Full) - Fortnite Soundtrack [Original + Battle Royale].mp3')
+pygame.mixer.music.play(-1)
 running = True
 
 while running:

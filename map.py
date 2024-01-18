@@ -4,10 +4,10 @@ pygame.init()
 
 pygame.display.set_caption("Aréne 1")
 screen = pygame.display.set_mode((600, 400))
-background = pygame.image.load('assets/bgarene.jpeg')
+background = pygame.image.load('pokemon/assets/bgarene.jpeg')
 
 
-mini_image_original = pygame.image.load('assets/salameche.png')
+mini_image_original = pygame.image.load('pokemon/assets/salameche.png')
 mini_image_size = (100, 100) 
 mini_image = pygame.transform.scale(mini_image_original, mini_image_size)
 
@@ -21,8 +21,8 @@ mini_width, mini_height = mini_image.get_size()
 mini_image_x = screen_width - mini_width - 10  
 mini_image_y = screen_height - mini_height - 10 
 
-
-
+pygame.mixer.music.load('pokemon/assets/FIRE SOUND EFFECT IN HIGH QUALITY.mp3')
+pygame.mixer.music.play(-1)
 running = True
 
 while running:
