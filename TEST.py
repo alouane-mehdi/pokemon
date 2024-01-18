@@ -1,6 +1,5 @@
 import pygame
 import sys
-from combat import Jeu
 
 # Définition de la classe Pokemon
 class Pokemon:
@@ -17,23 +16,18 @@ pygame.init()
 # Initialisation du module mixer pour la musique
 pygame.mixer.init()
 
-# Charger et jouer la musique de fond
-pygame.mixer.music.load("music/street-fight.mp3")  # Remplacez par le chemin de votre fichier de musique
-pygame.mixer.music.set_volume(0.5)  # Réglez le volume (0.0 à 1.0)
-pygame.mixer.music.play(-1)  # -1 signifie que la musique jouera en boucle
-
 # Création des Pokémon
-pikachu = Pokemon("Pikachu", "Électrique", "Célèbre pour ses joues électriques.", "image/pikachu.png")
-bulbizarre = Pokemon("Bulbizarre", "Plante/Poison", "Possède une plante sur son dos.", "image/Bulbizarre.png")
-salameche = Pokemon("Salameche", "Feu", "Sa queue est enflammée quand il est en bonne santé.", "image/salameche.png")
-carapuce = Pokemon("Carapuce", "Eau", "Un petit Pokémon tortue.", "image/carapuce.png")
+pikachu = Pokemon("Pikachu", "Électrique", "Célèbre pour ses joues électriques.", "assets/pikachu.png")
+bulbizarre = Pokemon("Bulbizarre", "Plante/Poison", "Possède une plante sur son dos.", "assets/bulbizarre.jpg")
+salameche = Pokemon("Salameche", "Feu", "Sa queue est enflammée quand il est en bonne santé.", "assets/salameche.jpg")
+carapuce = Pokemon("Carapuce", "Eau", "Un petit Pokémon tortue.", "assets/carapuce.jpg")
 
 # Création de la fenêtre principale
 ecran = pygame.display.set_mode((900, 400))
 pygame.display.set_caption("Pokémon Combat Simulator")
 
 # Charger l'image de fond
-fond = pygame.image.load("image/arene.webp")
+fond = pygame.image.load("assets/arene.png")
 fond = pygame.transform.scale(fond, (900, 400))
 
 # Fonction pour afficher les détails d'un Pokémon
