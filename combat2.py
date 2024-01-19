@@ -19,14 +19,10 @@ class Pokemon:
 
 # Initialisation de Pygame
 pygame.init()
-
-# Initialisation du module mixer pour la musique
 pygame.mixer.init()
-
-# Charger et jouer la musique de fond
-pygame.mixer.music.load("music/street-fight.mp3")  # Remplacez par le chemin de votre fichier de musique
-pygame.mixer.music.set_volume(0.5)  # Réglez le volume (0.0 à 1.0)
-pygame.mixer.music.play(-1)  # -1 signifie que la musique jouera en boucle
+pygame.mixer.music.load("music/street-fight.mp3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
 
 # Création des Pokémon
 pikachu = Pokemon("Pikachu", "Électrique", 30, "Célèbre pour ses joues électriques.", "image/pikachu.png")
@@ -37,8 +33,6 @@ carapuce = Pokemon("Carapuce", "Eau", 32, "Un petit Pokémon tortue.", "image/ca
 # Création de la fenêtre principale
 ecran = pygame.display.set_mode((900, 400))
 pygame.display.set_caption("Pokémon Combat Simulator")
-
-# Charger l'image de fond
 fond = pygame.image.load("image/arene.webp")
 fond = pygame.transform.scale(fond, (900, 400))
 
@@ -72,7 +66,13 @@ def choisir_pokemon():
         ecran.blit(carapuce.image, (650, 50))
         pygame.display.flip()
 
+def choisir_adversaire(pokemon_joueur):
+    adversaires = [pikachu, bulbizarre, salameche, carapuce]
+    adversaires.remove(pokemon_joueur)
+    return random.choice(adversaires)
+
 pokemon_joueur = choisir_pokemon()
+pokemon_adversaire = choisir_adversaire(pokemon_joueur)
 
 # Boucle principale
 while True:
@@ -82,11 +82,13 @@ while True:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                # Ici, vous pouvez définir la logique d'attaque ou d'interaction du Pokémon
-                pokemon_joueur.attaquer(bulbizarre)  # Exemple d'attaque sur Bulbizarre
+                pokemon_joueur.attaquer(pokemon_adversaire)
 
-    # Mise à jour de l'affichage si nécessaire
     ecran.blit(fond, (0, 0))
-    ecran.blit(pokemon_joueur.image, (50, 50))  # Affichage du Pokémon choisi
-    # Afficher d'autres éléments si nécessaire
+    ecran.blit(pokemon_joueur.image, (100, 50))  # Position du Pokémon du joueur
+    ecran.blit(pokemon_adversaire.image, (700, 50))  # Position de l'adversaire
     pygame.display.flip()
+
+
+
+
