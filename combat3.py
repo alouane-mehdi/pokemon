@@ -1,5 +1,6 @@
 import pygame
 import random
+import sys
 
 class Combat:
     def __init__(self, joueur, ennemis, ecran, fond):
@@ -13,14 +14,15 @@ class Combat:
         self.ennemi = random.choice(self.ennemis)
 
     def afficher_barre_de_vie(self, pokemon, position_x, position_y):
-        vie_max = 50  # Adaptez ceci à la vie maximale de vos Pokémon
+        vie_max = pokemon.vie_max  # Utilisez la vie maximale du Pokémon
         largeur_barre = 200
         barre_vie_rect = pygame.Rect(position_x, position_y, largeur_barre, 20)
-        pygame.draw.rect(self.ecran, (255, 0, 0), barre_vie_rect)
+        pygame.draw.rect(self.ecran, (255, 0, 0), barre_vie_rect)  # Barre de vie vide (rouge)
 
         vie_restante = max(0, int((pokemon.vie / vie_max) * largeur_barre))
         barre_vie_restante_rect = pygame.Rect(position_x, position_y, vie_restante, 20)
-        pygame.draw.rect(self.ecran, (0, 255, 0), barre_vie_restante_rect)
+        pygame.draw.rect(self.ecran, (0, 255, 0), barre_vie_restante_rect)  # Barre de vie actuelle (verte)
+
 
 
     def lancer_combat(self):
