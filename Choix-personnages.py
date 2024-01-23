@@ -1,6 +1,5 @@
 import pygame
 import sys
-from combat import Jeu
 
 # Définition de la classe Pokemon
 class Pokemon:
