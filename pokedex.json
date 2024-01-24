@@ -2,37 +2,29 @@
     {
         "nom": "Pikachu",
         "type": "\u00c9lectrique",
-        "defense": 35,
-        "puissance": 55,
-        "pv": 40,
+        "vie_max": 30,
         "description": "C\u00e9l\u00e8bre pour ses joues \u00e9lectriques.",
-        "image": "images/pikachu.png"
+        "chemin_image": "image/pikachu.png"
     },
     {
         "nom": "Bulbizarre",
         "type": "Plante/Poison",
-        "defense": 30,
-        "puissance": 45,
-        "pv": 35,
+        "vie_max": 35,
         "description": "Poss\u00e8de une plante sur son dos.",
-        "image": "image/bulbizarre.png"
+        "chemin_image": "image/bulbizarre.png"
     },
     {
         "nom": "Salameche",
         "type": "Feu",
-        "defense": 25,
-        "puissance": 60,
-        "pv": 39,
+        "vie_max": 33,
         "description": "Sa queue est enflamm\u00e9e quand il est en bonne sant\u00e9.",
-        "image": "image/salameche.png"
+        "chemin_image": "image/salameche.png"
     },
     {
         "nom": "Carapuce",
         "type": "Eau",
-        "defense": 40,
-        "puissance": 50,
-        "pv": 44,
+        "vie_max": 32,
         "description": "Un petit Pok\u00e9mon tortue.",
-        "image": "image/carapuce.png"
+        "chemin_image": "image/carapuce.png"
     }
 ]
