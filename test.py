@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import pygame
 import sys
 
@@ -80,3 +81,5 @@ while True:
     pygame.display.flip()
 
 
+=======
+>>>>>>> origin/mansour2

@@ -1,37 +1,36 @@
+# combattest.py
+
 import pygame
 import sys
 from button import Bouton
+from tuto import PokemonBattleArena  
+from combattest import PokemonGame  
 
 class MenuPrincipal:
-    def __init__(self):
-        pygame.init()
+    def __init__(self, pokemon_game_class):
+        self.pokemon_game_class = pokemon_game_class
 
+        pygame.init()
         self.ÉCRAN = pygame.display.set_mode((1280, 720))
         pygame.display.set_caption("Menu")
 
         self.FOND = pygame.image.load("assets/background.png")
 
-        # Charger les musiques
         pygame.mixer.music.load("assets/musicfond.mp3")
         self.BRUIT_SURVOL = pygame.mixer.Sound("assets/sonbouton.flac")
 
-        # Définir le volume initial des musiques
         pygame.mixer.music.set_volume(0.5)
         self.BRUIT_SURVOL.set_volume(0.7)
 
     def obtenir_police(self, taille):
         return pygame.font.Font("assets/font.ttf", taille)
 
-
     def options(self):
         while True:
             POSITION_SOURIS_OPTIONS = pygame.mouse.get_pos()
-
-            self.ÉCRAN.fill("white")
-
-            TEXTE_OPTIONS = self.obtenir_police(45).render("C'est l'écran OPTIONS.", True, "Black")
-            RECTANGLE_OPTIONS = TEXTE_OPTIONS.get_rect(center=(640, 260))
-            self.ÉCRAN.blit(TEXTE_OPTIONS, RECTANGLE_OPTIONS)
+            
+            pokemon_battle_arena = PokemonBattleArena()
+            pokemon_battle_arena.run()
 
             BOUTON_RETOUR_OPTIONS = Bouton(image=None, pos=(640, 460),
                                            text_input="RETOUR", font=self.obtenir_police(75), base_color="Black", hovering_color="Green")
@@ -45,12 +44,16 @@ class MenuPrincipal:
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if BOUTON_RETOUR_OPTIONS.verifier_input(POSITION_SOURIS_OPTIONS):
-                        self.menu_principal()
-
+                        return
             pygame.display.update()
 
+    def jouer(self):
+        pygame.mixer.music.stop()
+        game = self.pokemon_game_class()
+        game.run_game()
+
     def menu_principal(self):
-        pygame.mixer.music.play(-1)  # Boucler indéfiniment
+        pygame.mixer.music.play(-1)
         self.BRUIT_SURVOL.play(maxtime=0)
 
         while True:
@@ -64,12 +67,11 @@ class MenuPrincipal:
             self.ÉCRAN.blit(TEXTE_MENU, RECTANGLE_MENU)
 
             BOUTON_JOUER = Bouton(image=pygame.image.load("assets/Play Rect.png"), pos=(640, 250),
-                                  text_input="JOUER", font=self.obtenir_police(75), base_color="White", hovering_color="Blue", son_survol=self.BRUIT_SURVOL)
+                                  text_input="JOUER", font=self.obtenir_police(75), base_color="White", hovering_color="Blue")
             BOUTON_OPTIONS = Bouton(image=pygame.image.load("assets/Options Rect.png"), pos=(640, 400),
-                                    text_input="POKEDEX", font=self.obtenir_police(75), base_color="White", hovering_color="Blue", son_survol=self.BRUIT_SURVOL)
+                                    text_input="REGLES", font=self.obtenir_police(75), base_color="White", hovering_color="Blue")
             BOUTON_QUITTER = Bouton(image=pygame.image.load("assets/Quit Rect.png"), pos=(640, 550),
-                                    text_input="QUITTER", font=self.obtenir_police(75), base_color="White", hovering_color="Blue", son_survol=self.BRUIT_SURVOL)
-
+                                    text_input="QUITTER", font=self.obtenir_police(75), base_color="White", hovering_color="Blue")
             self.ÉCRAN.blit(TEXTE_MENU, RECTANGLE_MENU)
 
             for bouton in [BOUTON_JOUER, BOUTON_OPTIONS, BOUTON_QUITTER]:
@@ -78,17 +80,15 @@ class MenuPrincipal:
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    pygame.mixer.music.stop()  # Arrêter la musique avant de quitter
+                    pygame.mixer.music.stop()
                     pygame.quit()
                     sys.exit()
-                if event.type == pygame.MOUSEBUTTONDOWN:
+                elif event.type == pygame.MOUSEBUTTONDOWN:
                     if BOUTON_JOUER.verifier_input(POSITION_SOURIS_MENU):
-                        pygame.mixer.music.stop()  # Arrêter la musique avant la transition
                         self.jouer()
-                    if BOUTON_OPTIONS.verifier_input(POSITION_SOURIS_MENU):
-                        pygame.mixer.music.stop()
+                    elif BOUTON_OPTIONS.verifier_input(POSITION_SOURIS_MENU):
                         self.options()
-                    if BOUTON_QUITTER.verifier_input(POSITION_SOURIS_MENU):
+                    elif BOUTON_QUITTER.verifier_input(POSITION_SOURIS_MENU):
                         pygame.mixer.music.stop()
                         pygame.quit()
                         sys.exit()
@@ -96,6 +96,6 @@ class MenuPrincipal:
             pygame.display.update()
 
 if __name__ == "__main__":
-    menu_principal = MenuPrincipal()
+    from combattest import PokemonGame
+    menu_principal = MenuPrincipal(PokemonGame)
     menu_principal.menu_principal()
-

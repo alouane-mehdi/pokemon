@@ -4,13 +4,12 @@ import sys
 
 
 class Combat:
-    def __init__(self, joueur, ennemis, ecran, fond, menu_principal):
+    def __init__(self, joueur, ennemis, ecran, fond):
         self.joueur = joueur
         self.ennemis = ennemis
         self.ecran = ecran
         self.fond = fond
         self.ennemi = None
-        self.menu_principal = menu_principal  # Ajoutez une référence à l'instance du menu principal
 
     def choisir_ennemi(self):
         self.ennemi = random.choice(self.ennemis)
@@ -71,8 +70,5 @@ class Combat:
                 self.afficher_barre_de_vie(self.ennemi, 700, 30)
                 pygame.display.flip()
 
-            # Ajoutez une condition pour sortir de la boucle combat et revenir au menu principal
-            if not running:
-                return self.menu_principal()
 
         return False  # Si le jeu est quitté
