@@ -1,30 +1,31 @@
 [
     {
         "nom": "Pikachu",
-        "type": "\u00c9lectrique",
+        "type_pokemon": "Électrique",
         "vie_max": 30,
-        "description": "C\u00e9l\u00e8bre pour ses joues \u00e9lectriques.",
+        "description": "Célèbre pour ses joues électriques.",
         "chemin_image": "image/pikachu.png"
     },
     {
         "nom": "Bulbizarre",
-        "type": "Plante/Poison",
+        "type_pokemon": "Plante/Poison",
         "vie_max": 35,
-        "description": "Poss\u00e8de une plante sur son dos.",
+        "description": "Possède une plante sur son dos.",
         "chemin_image": "image/bulbizarre.png"
     },
     {
         "nom": "Salameche",
-        "type": "Feu",
+        "type_pokemon": "Feu",
         "vie_max": 33,
-        "description": "Sa queue est enflamm\u00e9e quand il est en bonne sant\u00e9.",
+        "description": "Sa queue est enflammée quand il est en bonne santé.",
         "chemin_image": "image/salameche.png"
     },
     {
         "nom": "Carapuce",
-        "type": "Eau",
+        "type_pokemon": "Eau",
         "vie_max": 32,
-        "description": "Un petit Pok\u00e9mon tortue.",
+        "description": "Un petit Pokémon tortue.",
         "chemin_image": "image/carapuce.png"
     }
 ]
+

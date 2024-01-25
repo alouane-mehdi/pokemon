@@ -1,4 +1,3 @@
-# pokemon.py
 import pygame
 import random
 
@@ -41,5 +40,8 @@ class Pokemon:
         ennemi.vie -= degats
         print(f"{self.nom} attaque {ennemi.nom} et lui inflige {degats} dégâts.")
 
-    # Vous pouvez ajouter d'autres méthodes nécessaires ici.
+
+ 
+
+
 

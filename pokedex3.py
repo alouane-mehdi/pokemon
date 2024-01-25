@@ -24,3 +24,6 @@ class Pokedex:
 
     def obtenir_pokemons(self):
         return self.pokemons
+
+
+

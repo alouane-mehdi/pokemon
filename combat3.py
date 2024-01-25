@@ -70,3 +70,4 @@ class Combat:
                 pygame.display.flip()
 
         return False  # Si le jeu est quitté
+

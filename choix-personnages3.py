@@ -28,8 +28,11 @@ def choisir_pokemon(pokemons, ecran, fond):
 
 def afficher_pokedex(ecran, pokedex):
     font = pygame.font.SysFont(None, 36)
-    ecran.fill((255, 255, 255))  # Remplit l'écran avec une couleur blanche
-
+    
+    # Chargez l'image de fond du Pokédex
+    fond_pokedex = pygame.image.load("image/pokemon-theme2.png")
+    ecran.blit(fond_pokedex, (0, 0))
+    
     for i, pokemon in enumerate(pokedex.obtenir_pokemons()):
         nom_text = font.render(pokemon["nom"], True, (0, 0, 0))
         ecran.blit(nom_text, (20, 30 + i * 40))
@@ -40,6 +43,7 @@ def afficher_pokedex(ecran, pokedex):
             ecran.blit(image, (200, 20 + i * 40))
         except pygame.error:
             print(f"Erreur lors du chargement de l'image pour {pokemon['nom']}")
+
 
 # Initialisation de Pygame et chargement des ressources
 pygame.init()
@@ -106,6 +110,13 @@ while True:
     pygame.display.flip()
 
 pygame.quit()
+
+
+
+
+
+
+
 
 
 
