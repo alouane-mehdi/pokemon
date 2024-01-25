@@ -18,7 +18,7 @@ blanc = (255, 255, 255)
 jaune = (255, 255, 0)  # Jaune
 
 # Police de texte
-font = pygame.font.Font(None, 24)  # Diminuer la taille du texte
+font = pygame.font.Font(None, 52)  # Diminuer la taille du texte
 
 # Position verticale initiale du texte
 position_y = hauteur // 2 - 30  # 30 est la moitié de la hauteur du texte
@@ -45,7 +45,7 @@ while running:
     afficher_texte_position_y("Appuyez sur 'ESPACE' pour attaquer", position_y + 100)
     afficher_texte_position_y("Appuyez sur 'R' pour recommencez une partie ", position_y + 150)
     afficher_texte_position_y("Appuyez sur 'Q' pour quitter la partie et retournez au menu principale", position_y + 200)
-
+    afficher_texte_position_y("A la fin du comnat appuyez sur 'P' pour aller sur le pokedex", position_y + 250)
     # Incrémenter la position verticale pour déplacer le texte vers le haut
     position_y -= 1
 
