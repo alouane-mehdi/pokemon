@@ -1,0 +1,145 @@
+[
+    {
+        "nom": "Pikachu",
+        "type_pokemon": "Électrique",
+        "vie_max": 30,
+        "description": "Célèbre pour ses joues électriques.",
+        "chemin_image": "image/pikachu.png",
+        "attaques": [
+            {"nom": "Éclair", "degats": 20},
+            {"nom": "Vive-Attaque", "degats": 15}
+        ]
+    },
+    {
+        "nom": "Bulbizarre",
+        "type_pokemon": "Plante/Poison",
+        "vie_max": 35,
+        "description": "Possède une plante sur son dos.",
+        "chemin_image": "image/bulbizarre.png",
+        "attaques": [
+            {"nom": "Fouet lianes", "degats": 18},
+            {"nom": "Tranch'herbe", "degats": 22}
+        ]
+    },
+    {
+        "nom": "Salameche",
+        "type_pokemon": "Feu",
+        "vie_max": 33,
+        "description": "Sa queue est enflammée quand il est en bonne santé.",
+        "chemin_image": "image/salameche.png",
+        "attaques": [
+            {"nom": "Griffe", "degats": 15},
+            {"nom": "Flammèche", "degats": 20}
+        ]
+    },
+    {
+        "nom": "Carapuce",
+        "type_pokemon": "Eau",
+        "vie_max": 32,
+        "description": "Un petit Pokémon tortue.",
+        "chemin_image": "image/carapuce.png",
+        "attaques": [
+            {"nom": "Écume", "degats": 12},
+            {"nom": "Pistolet à O", "degats": 18}
+        ]
+    },
+    {
+        "nom": "Dracaufeu",
+        "type_pokemon": "Feu/Vol",
+        "vie_max": 60,
+        "description": "Le feu brûle sur sa queue.",
+        "chemin_image": "image/dracaufeu.png",
+        "attaques": [
+            {"nom": "Déflagration", "degats": 25},
+            {"nom": "Danseflamme", "degats": 30}
+        ]
+    },
+    {
+        "nom": "Evoli",
+        "type_pokemon": "Normal",
+        "vie_max": 40,
+        "description": "Peut évoluer en différentes formes.",
+        "chemin_image": "image/evoli.png",
+        "attaques": [
+            {"nom": "Charge", "degats": 12},
+            {"nom": "Morsure", "degats": 15}
+        ]
+    },
+    {
+        "nom": "Mewtwo",
+        "type_pokemon": "Psy",
+        "vie_max": 80,
+        "description": "Un Pokémon légendaire très puissant.",
+        "chemin_image": "image/alakazam.png",
+        "attaques": [
+            {"nom": "Psykoud'boul", "degats": 35},
+            {"nom": "Psycho", "degats": 40}
+        ]
+    },
+    {
+        "nom": "Léviator",
+        "type_pokemon": "Eau/Vol",
+        "vie_max": 200,
+        "description": "Un redoutable Pokémon aquatique.",
+        "chemin_image": "image/leviator.png",
+        "attaques": [
+            {"nom": "Hydrocanon", "degats": 45},
+            {"nom": "Colère", "degats": 50}
+        ]
+    },
+    {
+        "nom": "Rondoudou",
+        "type_pokemon": "Normal/Fée",
+        "vie_max": 45,
+        "description": "Son chant endort ses ennemis.",
+        "chemin_image": "image/rondoudou.png",
+        "attaques": [
+            {"nom": "Doux Baiser", "degats": 18},
+            {"nom": "Charme", "degats": 22}
+        ]
+    },
+    {
+        "nom": "Alakazam",
+        "type_pokemon": "Psy",
+        "vie_max": 55,
+        "description": "Un Pokémon très intelligent.",
+        "chemin_image": "image/alakazam.png",
+        "attaques": [
+            {"nom": "Lévitation", "degats": 25},
+            {"nom": "Rafale Psy", "degats": 30}
+        ]
+    },
+    {
+        "nom": "Goupix",
+        "type_pokemon": "Feu",
+        "vie_max": 50,
+        "description": "Une boule de feu entoure sa queue.",
+        "chemin_image": "image/goupix.png",
+        "attaques": [
+            {"nom": "Flammèche", "degats": 20},
+            {"nom": "Queue de fer", "degats": 18}
+        ]
+    },
+    {
+        "nom": "Gardevoir",
+        "type_pokemon": "Psy/Fée",
+        "vie_max": 65,
+        "description": "Protège son dresseur avec dévouement.",
+        "chemin_image": "image/gardevoir.png",
+        "attaques": [
+            {"nom": "Psyko", "degats": 30},
+            {"nom": "Choc mental", "degats": 25}
+        ]
+    },
+    {
+        "nom": "Lugia",
+        "type_pokemon": "Psy/Vol",
+        "vie_max": 200,
+        "description": "Un gardien des mers très rare.",
+        "chemin_image": "image/lugia.png",
+        "attaques": [
+            {"nom": "Aéropique", "degats": 45},
+            {"nom": "Psychic", "degats": 50}
+        ]
+    }
+]
