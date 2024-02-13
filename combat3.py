@@ -1,6 +1,7 @@
 import pygame
 import random
 import sys
+import json
 
 
 class Combat:
@@ -45,7 +46,7 @@ class Combat:
                         if self.pokemon_est_vaincu(self.ennemi):
                             message = f"{self.joueur.nom} a gagné le combat!"
                             texte = police.render(message, True, (0, 0, 0))
-                            self.ecran.blit(texte, (250, 200))
+                            self.ecran.blit(texte, (500, 500))
                             pygame.display.flip()
                             pygame.time.delay(5000)
                             return True  # Le joueur gagne
@@ -69,6 +70,5 @@ class Combat:
                 self.afficher_barre_de_vie(self.joueur, 100, 30)
                 self.afficher_barre_de_vie(self.ennemi, 700, 30)
                 pygame.display.flip()
-
 
         return False  # Si le jeu est quitté

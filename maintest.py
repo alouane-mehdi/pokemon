@@ -3,7 +3,7 @@
 import pygame
 import sys
 from button import Bouton
-from tuto import PokemonBattleArena  
+from tuto import Regles 
 from combattest import PokemonGame  
 
 class MenuPrincipal:
@@ -29,8 +29,8 @@ class MenuPrincipal:
         while True:
             POSITION_SOURIS_OPTIONS = pygame.mouse.get_pos()
             
-            pokemon_battle_arena = PokemonBattleArena()
-            pokemon_battle_arena.run()
+            regles = Regles()
+            regles.run()
 
             BOUTON_RETOUR_OPTIONS = Bouton(image=None, pos=(640, 460),
                                            text_input="RETOUR", font=self.obtenir_police(75), base_color="Black", hovering_color="Green")
@@ -50,7 +50,8 @@ class MenuPrincipal:
     def jouer(self):
         pygame.mixer.music.stop()
         game = self.pokemon_game_class()
-        game.run_game()
+        game.run()
+        
 
     def menu_principal(self):
         pygame.mixer.music.play(-1)
