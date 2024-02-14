@@ -70,7 +70,7 @@
         "type_pokemon": "Psy",
         "vie_max": 80,
         "description": "Un Pokémon légendaire très puissant.",
-        "chemin_image": "image/alakazam.png",
+        "chemin_image": "image/mewtow.png",
         "attaques": [
             {"nom": "Psykoud'boul", "degats": 35},
             {"nom": "Psycho", "degats": 40}
@@ -143,3 +143,5 @@
         ]
     }
 ]
+
+

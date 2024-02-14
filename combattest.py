@@ -16,7 +16,7 @@ class PokemonGame:
         self.mon_pokedex = Pokedex()
         self.ecran = pygame.display.set_mode((1280, 720))
         pygame.display.set_caption("Pokémon Combat Simulator")
-        self.fond = pygame.image.load("image/arene.webp")
+        self.fond = pygame.image.load("assets/arenetest1.jpg")
         self.fond = pygame.transform.scale(self.fond, (1280, 720))
         self.pokemons_combattus = []
         self.afficher_pokedex_flag = False
@@ -33,10 +33,13 @@ class PokemonGame:
             self.pokemons.append(pokemon)
 
     def choisir_pokemon(self):
-        pokemon_width = 200
-        spacing = 50
-        total_width = pokemon_width * len(self.pokemons) + spacing * (len(self.pokemons) - 1)
+        pokemon_width = 150  # Redimensionner la largeur des Pokémon pour qu'ils s'adaptent mieux à l'écran
+        spacing = 20  # Espacement entre les Pokémon
+        max_columns = 4  # Nombre maximum de colonnes
+
+        total_width = pokemon_width * max_columns + spacing * (max_columns - 1)
         start_x = (self.ecran.get_width() - total_width) // 2
+        start_y = 50  # Ajuster la position verticale de départ pour placer les Pokémon un peu plus haut
 
         while True:
             for event in pygame.event.get():
@@ -46,13 +49,34 @@ class PokemonGame:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     pos = pygame.mouse.get_pos()
                     for i, pokemon in enumerate(self.pokemons):
-                        if pygame.Rect(start_x + i * (pokemon_width + spacing), 50, pokemon_width, 200).collidepoint(pos):
+                        column = i % max_columns
+                        row = i // max_columns
+                        x = start_x + column * (pokemon_width + spacing)
+                        y = start_y + row * (pokemon_width + spacing)
+                        pokemon_rect = pygame.Rect(x, y, pokemon_width, pokemon_width)
+                        if pokemon_rect.collidepoint(pos):
                             return pokemon
 
             self.ecran.blit(self.fond, (0, 0))
-            for i, pokemon in enumerate(self.pokemons):
-                self.ecran.blit(pokemon.image, (start_x + i * (pokemon_width + spacing), 50))
+            self.afficher_tous_les_pokemon(start_x, start_y, pokemon_width, spacing, max_columns)
             pygame.display.flip()
+
+    def afficher_tous_les_pokemon(self, start_x, start_y, pokemon_width, spacing, max_columns):
+        max_rows = (len(self.pokemons) + max_columns - 1) // max_columns
+
+        for i, pokemon in enumerate(self.pokemons):
+            column = i % max_columns
+            row = i // max_columns
+            x = start_x + column * (pokemon_width + spacing)
+            y = start_y + row * (pokemon_width + spacing)
+
+            # Redimensionner l'image du Pokémon pour qu'elle s'adapte au cadre
+            pokemon_image = pygame.transform.scale(pokemon.image, (pokemon_width, pokemon_width))
+
+            # Afficher l'image du Pokémon
+            self.ecran.blit(pokemon_image, (x, y))
+
+        pygame.display.flip()
 
     def afficher_pokedex(self):
         font = pygame.font.SysFont(None, 36)
@@ -73,30 +97,6 @@ class PokemonGame:
                     print(f"Erreur lors du chargement de l'image pour {pokemon['nom']}")
                 pygame.display.flip()  # Actualiser l'affichage après avoir ajouté le texte et l'image
 
-    def afficher_tous_les_pokemon(self):
-        pokemon_width = 200
-        pokemon_height = 200
-        spacing = 50
-        max_columns = 4  # Nombre maximum de colonnes
-
-        # Calcul du nombre de lignes nécessaires en fonction du nombre total de Pokémon
-        total_pokemon = len(self.pokemons)
-        max_rows = (total_pokemon + max_columns - 1) // max_columns
-
-        cell_width = (self.ecran.get_width() - (max_columns + 1) * spacing) // max_columns
-        cell_height = (self.ecran.get_height() - (max_rows + 1) * spacing) // max_rows
-
-        for i, pokemon in enumerate(self.pokemons):
-            row = i // max_columns
-            column = i % max_columns
-            x = spacing + column * (cell_width + spacing)
-            y = spacing + row * (cell_height + spacing)
-
-            pokemon_image = pygame.transform.scale(pokemon.image, (cell_width, cell_height))
-            self.ecran.blit(pokemon_image, (x, y))
-
-        pygame.display.flip()
-
     def run(self):
         while True:
             for event in pygame.event.get():
@@ -113,6 +113,10 @@ class PokemonGame:
                 pokemon_joueur = self.choisir_pokemon()
                 if pokemon_joueur:
                     self.pokemons_combattus.append(pokemon_joueur)
+
+                    # Déplacer les Pokémon combattants vers le bas de l'écran
+                    start_y = 400  # Nouvelle position Y pour les Pokémon combattants
+                    self.afficher_tous_les_pokemon(0, start_y, 150, 20, 4)
 
                     ennemis_potentiels = [p for p in self.pokemons if p != pokemon_joueur]
                     combat = Combat(pokemon_joueur, ennemis_potentiels, self.ecran, self.fond)
@@ -133,10 +137,4 @@ class PokemonGame:
 if __name__ == "__main__":
     game = PokemonGame()
     game.run()
-
-
-
-
-
-
 
